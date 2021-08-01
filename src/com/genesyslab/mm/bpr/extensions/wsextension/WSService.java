@@ -4,7 +4,6 @@ package com.genesyslab.mm.bpr.extensions.wsextension;
 import com.genesyslab.mm.bpr.extensions.logger.ILogger;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.io.OutputStream;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,7 +11,7 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 import org.json.JSONObject;
 
-public class WSService implements IWSService, Runnable {
+public class WSService implements IWSService { //}, Runnable {
    protected ILogger logger;
    protected Properties properties;
    protected HttpURLConnection connection;
@@ -26,7 +25,8 @@ public class WSService implements IWSService, Runnable {
    }
 
    public void init() {
-      this.openConnection();
+      this.wsurl = this.properties.getProperty("ws-url");
+      //this.openConnection();
    }
 
    public Double call(String uri) {
@@ -61,32 +61,7 @@ public class WSService implements IWSService, Runnable {
 
       return resultat;
    }
-
-   /*
-   public Double executeStatement(PreparedStatement var1) {
-      if (null == var1) {
-         this.logger.error("DBServiceAbstract::executeStatement: attempt to execute empty prepared statement");
-         return null;
-      } else {
-         Double var2 = null;
-
-         try {
-            ResultSet var3 = var1.executeQuery();
-            if (var3.next()) {
-               var2 = new Double(var3.getDouble(1));
-            } else {
-               this.logger.debug("DBServiceAbstract::executeStatement: empty result set");
-            }
-         } catch (SQLException var4) {
-            this.logger.error("DBServiceAbstract::executeStatement:  sql exception: ", var4);
-         } catch (Throwable var5) {
-            this.logger.error("DBServiceAbstract::executeStatement: exception: ", var5);
-         }
-
-         return var2;
-      }
-   }
-*/
+/*
    public void shutdown() {
       this.logger.debug("WSServiceAbstract::shutdown");
       synchronized(this) {
@@ -104,7 +79,8 @@ public class WSService implements IWSService, Runnable {
       this.closeConnection();
       this.logger = null;
    }
-
+*/
+/*
    protected void closeConnection() {
       if (null != this.connection) {
          try {
@@ -118,7 +94,8 @@ public class WSService implements IWSService, Runnable {
       }
 
    }
-
+*/
+/*
    public synchronized void openConnection() {
       if (null == this.connectionThread) {
          String var1 = Thread.currentThread().getName() + " DBP";
@@ -126,7 +103,8 @@ public class WSService implements IWSService, Runnable {
          this.connectionThread.start();
       }
    }
-
+*/
+/*
    public void run() {
       int var1;
       try {
@@ -142,14 +120,6 @@ public class WSService implements IWSService, Runnable {
 
       while(this.continueReconnection) {
          try {
-            /*
-            URL url = new URL(wsurl);
-            this.connection = (HttpURLConnection) url.openConnection();
-            this.connection.setRequestMethod("POST");
-            this.connection.setRequestProperty("Content-Type", "application/json; utf-8");
-            this.connection.setRequestProperty("Accept", "application/json");
-            this.connection.setDoOutput(true);
-*/
             try {
                if (null != this.connection) {
                   this.logger.debug("DBServiceAbstract::openConnection: connected successfully to sql server: ");
@@ -177,4 +147,5 @@ public class WSService implements IWSService, Runnable {
          this.connectionThread = null;
       }
    }
+*/
 }

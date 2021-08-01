@@ -31,7 +31,7 @@ public class BPR_WS_Extension extends Extension implements StatCalculator, ILogg
    private Properties wsProperties = new Properties(); // Propriétés du WebService
    private Hashtable tenantIds = new Hashtable();
    private Vector currentStatistics = new Vector();
-   private IWSService dbService;
+   private IWSService wsService;
    private Hashtable loggersMap = new Hashtable();
    private Level logLevel;
    private SimpleDateFormat formatter;
@@ -131,11 +131,11 @@ public class BPR_WS_Extension extends Extension implements StatCalculator, ILogg
    }
 
    private void initWSService() {
-      this.dbService = WSServiceFactory.getWSService(this.wsProperties, this);
-      if (null != this.dbService) {
-         this.dbService.init();
+      this.wsService = WSServiceFactory.getWSService(this.wsProperties, this);
+      if (null != this.wsService) {
+         this.wsService.init();
       } else {
-         this.error("BPR_WS_Extension::initDBService: can't initialize DB Service");
+         this.error("BPR_WS_Extension::initWSService: can't initialize DB Service");
       }
 
    }
@@ -156,9 +156,9 @@ public class BPR_WS_Extension extends Extension implements StatCalculator, ILogg
    protected void shutdown() {
       this.debug("BPR_WS_Extension::shutdown");
       this.releaseSupportedStatTypes();
-      if (null != this.dbService) {
-         this.dbService.shutdown();
-         this.dbService = null;
+      if (null != this.wsService) {
+         //this.dbService.shutdown();
+         this.wsService = null;
       }
 
       this.shutdownLogger();
@@ -226,7 +226,7 @@ public class BPR_WS_Extension extends Extension implements StatCalculator, ILogg
          BPR_WS_Statistics var8 = null;
 
          try {
-            var8 = new BPR_WS_Statistics(this, (BPR_WS_TranslationData)this.translationData.clone(), this.dbService, var7, var5, var3, var4);
+            var8 = new BPR_WS_Statistics(this, (BPR_WS_TranslationData)this.translationData.clone(), this.wsService, var7, var5, var3, var4);
          } catch (UnboundThreadException var10) {
             this.error((Object)"BPR_WS_Extension::createStatistics: can't create statistics", (Throwable)var10);
             return null;
