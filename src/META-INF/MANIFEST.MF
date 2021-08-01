@@ -1,0 +1,11 @@
+Manifest-Version: "1.0"
+Specification-Title: "Business Process Routing Database Java Stat Exte
+ nsion"
+Class-Path: Opta2000.jar Seropto.jar db2jcc.jar sqlj.zip
+Created-By: 1.5.0_07 (Sun Microsystems Inc.)
+Main-Class: com/genesyslab/mm/bpr/extensions/wsextension/BPR_WS_Extens
+ ion
+Implementation-Version: "8.0.002.00"
+Implementation-Vendor: "Copyright (C) 2008-2009 Genesys Telecommunicat
+ ions Laboratories, Inc."
+
