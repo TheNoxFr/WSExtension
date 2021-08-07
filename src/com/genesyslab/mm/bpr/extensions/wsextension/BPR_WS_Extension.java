@@ -23,16 +23,15 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.NoSuchElementException;
 import java.util.Properties;
-import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class BPR_WS_Extension extends Extension implements StatCalculator, ILogger {
-   private Hashtable supportedStatTypes = new Hashtable();
+   private Hashtable<String, BPR_WS_StatType> supportedStatTypes = new Hashtable<String, BPR_WS_StatType>();
    private Properties wsProperties = new Properties(); // Propriétés du WebService
-   private Hashtable tenantIds = new Hashtable();
-   private Vector currentStatistics = new Vector();
+   private Hashtable<String, String> tenantIds = new Hashtable<String, String>();
+   private Vector<Statistics> currentStatistics = new Vector<Statistics>();
    private IWSService wsService;
-   private Hashtable loggersMap = new Hashtable();
+   private Hashtable<String, BPR_WS_Extension> loggersMap = new Hashtable<String, BPR_WS_Extension>();
    private Level logLevel;
    private SimpleDateFormat formatter;
    private BPR_WS_TranslationData translationData;
@@ -50,7 +49,7 @@ public class BPR_WS_Extension extends Extension implements StatCalculator, ILogg
    }
 
    private void releaseSupportedStatTypes() {
-      Enumeration var1 = this.supportedStatTypes.keys();
+      Enumeration<String> var1 = this.supportedStatTypes.keys();
 
       while(var1.hasMoreElements()) {
          BPR_WS_StatType var2 = (BPR_WS_StatType)this.supportedStatTypes.remove(var1.nextElement());
@@ -142,7 +141,7 @@ public class BPR_WS_Extension extends Extension implements StatCalculator, ILogg
 
    private void printStatServerInformation() {
       this.debug("BPR_WS_Extension::printStatServerInformation:\tImplemented following " + this.supportedStatTypes.size() + " statistics: ");
-      Enumeration var1 = this.supportedStatTypes.keys();
+      Enumeration<String> var1 = this.supportedStatTypes.keys();
 
       while(true) {
          try {
@@ -177,7 +176,7 @@ public class BPR_WS_Extension extends Extension implements StatCalculator, ILogg
       this.currentStatistics.removeElement(var1);
    }
 
-   public Enumeration getSupportedStatTypes() throws InvalidReferenceException {
+   public Enumeration<BPR_WS_StatType> getSupportedStatTypes() throws InvalidReferenceException {
       this.debug("BPR_WS_Extension::getSupportedStatTypes: " + this.supportedStatTypes.toString());
       return this.supportedStatTypes.elements();
    }

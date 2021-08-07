@@ -4,6 +4,7 @@ package com.genesyslab.mm.bpr.extensions.logger;
 public class Level {
    private int value;
    private String stringToPrint;
+   /*
    private static final int OFF_INT = Integer.MAX_VALUE;
    private static final int FATAL_INT = 50000;
    private static final int ERROR_INT = 40000;
@@ -11,6 +12,7 @@ public class Level {
    private static final int INFO_INT = 20000;
    private static final int DEBUG_INT = 10000;
    private static final int ALL_INT = Integer.MIN_VALUE;
+   */
    public static final Level OFF = new Level(Integer.MAX_VALUE, "Off");
    public static final Level FATAL = new Level(50000, "Fatal");
    public static final Level ERROR = new Level(40000, "Error");

@@ -18,7 +18,7 @@ public class BPR_WS_Statistics extends Statistics {
    private IWSService wsService;
    private String jsonBody;
 
-   BPR_WS_Statistics(BPR_WS_Extension var1, BPR_WS_TranslationData var2, IWSService var3, BPR_WS_StatObject var4, StatType var5, ReportingSettings var6, Hashtable var7) throws UnboundThreadException, IllegalArgumentException {
+   BPR_WS_Statistics(BPR_WS_Extension var1, BPR_WS_TranslationData var2, IWSService var3, BPR_WS_StatObject var4, StatType var5, ReportingSettings var6, Hashtable<String,String> var7) throws UnboundThreadException, IllegalArgumentException {
       super(var4, var5, var6, var7);
       if (null == var1) {
          throw new IllegalArgumentException("BPR_WS_Statistics::BPR_WS_Statistics: parent can't be 'null'");
@@ -35,7 +35,7 @@ public class BPR_WS_Statistics extends Statistics {
       }
    }
 
-   private void updateTranslationData(Hashtable var1) {
+   private void updateTranslationData(Hashtable<String,String> var1) {
       try {
          String var3;
          for(int var4 = 0; var4 <= ObjectRegistryEnum.getMaxIndex(); ++var4) {
@@ -55,7 +55,7 @@ public class BPR_WS_Statistics extends Statistics {
       this.logger.debug(this.translationData.toString());
    }
 
-   private void initBody(Hashtable var1) {
+   private void initBody(Hashtable<String, String> var1) {
       try {
          String statname = (String)var1.get("ws-name");
          String dbid = this.getObjectDBIDByType(this.statObject.getProperties(), "DBID");

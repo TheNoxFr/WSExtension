@@ -11,8 +11,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Properties;
 
-import javax.swing.plaf.TextUI;
-
 import org.json.JSONObject;
 
 public class WSService implements IWSService { //}, Runnable {
@@ -20,8 +18,6 @@ public class WSService implements IWSService { //}, Runnable {
    protected Properties properties;
    protected HttpURLConnection connection;
    protected String wsurl;
-   private Thread connectionThread = null;
-   private boolean continueReconnection = true;
 
    WSService(Properties properties, ILogger logger) {
       this.properties = properties;
