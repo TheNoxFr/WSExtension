@@ -56,7 +56,7 @@ public class WSService implements IWSService { //}, Runnable {
 
          JSONObject retObj = new JSONObject(result.toString());
 
-         resultat = Double.parseDouble(retObj.get("value").toString());
+         resultat = Double.parseDouble(retObj.get("Value").toString());
 
          this.connection.disconnect();
 
