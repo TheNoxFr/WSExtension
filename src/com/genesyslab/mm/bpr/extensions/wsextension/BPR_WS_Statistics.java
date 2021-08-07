@@ -60,7 +60,7 @@ public class BPR_WS_Statistics extends Statistics {
          String statname = (String)var1.get("ws-name");
          String dbid = this.getObjectDBIDByType(this.statObject.getProperties(), "DBID");
 
-         this.jsonBody = "{\"Id\":\"" + dbid + "\",\"Stat\":\"" + statname + "\"}";
+         this.jsonBody = "{\"id\":\"" + dbid + "\",\"stat\":\"" + statname + "\"}";
       } catch (Exception ex)
       {}
    }
