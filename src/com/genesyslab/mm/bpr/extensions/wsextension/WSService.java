@@ -8,7 +8,11 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.Properties;
+
+import javax.swing.plaf.TextUI;
+
 import org.json.JSONObject;
 
 public class WSService implements IWSService { //}, Runnable {
@@ -29,18 +33,22 @@ public class WSService implements IWSService { //}, Runnable {
       //this.openConnection();
    }
 
-   public Double call(String uri) {
+   public Double call(String body) {
 
       Double resultat = 0.0;
 
       try {
-         URL url = new URL(wsurl + uri);
+         URL url = new URL(wsurl);
          this.connection = (HttpURLConnection) url.openConnection();
-         this.connection.setRequestMethod("GET");
+         this.connection.setRequestMethod("POST");
          this.connection.setRequestProperty("Content-Type", "application/json; utf-8");
          this.connection.setRequestProperty("Accept", "application/json");
-         this.connection.setDoOutput(false);
-         this.connection.connect();
+         this.connection.setDoOutput(true);
+         OutputStream os = this.connection.getOutputStream();
+         byte[] input = body.getBytes("utf-8");
+         os.write(input, 0, input.length);
+         os.flush();
+         //this.connection.connect();
 
          InputStream in = new BufferedInputStream(connection.getInputStream());
          BufferedReader reader = new BufferedReader(new InputStreamReader(in));

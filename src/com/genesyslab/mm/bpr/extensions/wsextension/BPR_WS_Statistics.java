@@ -16,7 +16,7 @@ public class BPR_WS_Statistics extends Statistics {
    private BPR_WS_StatObject statObject;
    private ILogger logger;
    private IWSService wsService;
-   private String uriComplete;
+   private String jsonBody;
 
    BPR_WS_Statistics(BPR_WS_Extension var1, BPR_WS_TranslationData var2, IWSService var3, BPR_WS_StatObject var4, StatType var5, ReportingSettings var6, Hashtable var7) throws UnboundThreadException, IllegalArgumentException {
       super(var4, var5, var6, var7);
@@ -31,7 +31,7 @@ public class BPR_WS_Statistics extends Statistics {
          this.wsService = var3;
          this.translationData = var2;
          this.updateTranslationData(var7);
-         this.initURI(var7);
+         this.initBody(var7);
       }
    }
 
@@ -55,12 +55,12 @@ public class BPR_WS_Statistics extends Statistics {
       this.logger.debug(this.translationData.toString());
    }
 
-   private void initURI(Hashtable var1) {
+   private void initBody(Hashtable var1) {
       try {
          String statname = (String)var1.get("ws-name");
          String dbid = this.getObjectDBIDByType(this.statObject.getProperties(), "DBID");
 
-         this.uriComplete = "/" + statname + "/" + dbid;
+         this.jsonBody = "{\"Id\":\"" + dbid + "\",\"Name\":\"" + statname + "\"}";
       } catch (Exception ex)
       {}
    }
@@ -85,7 +85,7 @@ public class BPR_WS_Statistics extends Statistics {
          return null;
       } 
 
-      Double var1 = this.wsService.call(this.uriComplete);
+      Double var1 = this.wsService.call(this.jsonBody);
       if (null != var1) {
          this.logger.debug("BPR_WS_Statistics::getValue: returned value: " + var1.toString());
       } else {
